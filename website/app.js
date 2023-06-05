@@ -80,3 +80,14 @@ function getDataAndUpdateUI() {
 const updateUI = async () => {
     const response = await fetch('')
 } 
+
+document.getElementById('generate').addEventListener('click', ()=>{
+    const countryCode = document.getElementById('search-country-dropdown').value;        
+    const zip = document.getElementById('zip').text;    
+    const feeling = document.getElementById('feelings').text;
+
+    if(countryCode == 'Select Country') {
+        alert('Kindly Select a Country..');
+        return;
+    } else if(zip)
+})
