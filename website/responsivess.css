@@ -1,0 +1,196 @@
+@media screen and (max-width: 400px) {
+    #history-button {
+        padding: 7px 10px;
+        font-weight: 400;
+        font-size: 15px;
+    }
+    .search-common-props {
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 430px) {
+    .history-list {
+        width: 65%;
+    }
+    .response-content {
+        flex-direction: column;
+    }
+    #wind-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    .search-common-props {
+        padding: 10px;        
+    }    
+    #generate {
+        font-size: 12px;
+        padding: 7px 12px;
+    }
+    #location-title {
+        font-size: 25px;
+    }
+    #temp {
+        font-size: 35px;
+    }
+    .c-name {
+        font-size: 25px;
+    }
+    .item-temp {
+        font-size: 25px;
+    }
+    #user-feelings {
+        font-size: 16px;
+    }    
+}
+@media screen and (max-width: 500px) {
+    #temp {
+        font-size: 40px;
+    }
+    #location-title {
+        font-size: 30px;
+    }
+    .history-list {
+        width: 70%;
+    }
+    .c-name {
+        font-size: 25px;
+    }
+    .item-temp {
+        font-size: 26px;
+    }
+}
+@media screen and (max-width: 550px) {
+    #location-title {
+        font-size: 35px;
+    }
+    #temp {
+        font-size: 50px;
+        margin: 15px 0px 0px 0px;
+    }
+    #conversion {
+        margin-bottom: 5px;
+    }
+    #date {
+        font-size: 16px;
+    }
+    #wind-container {
+        font-size: 18px;
+    }
+    .right-content {
+        font-size: 18px;
+    }
+    .user-feelings-container {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 650px) {
+    #content {        
+        flex-direction: column;
+        align-items: flex-start;        
+    }
+    #wind-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .temp-conversion {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;        
+    }
+    #date {
+        text-align: center;
+    }
+    #wind-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    #right-main-container {
+        padding: 15%;
+    }
+}
+
+@media screen and (max-width: 760px){
+    #history-button {
+        position: fixed;
+        top: 0;                                
+        transform: translate(-50%, 0);
+        left: 50%;
+    }    
+
+    .history-list {
+        width: 70%;        
+        margin-left: -200vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow-y: scroll;
+        transition: all 0.5s ease; 
+        padding: 35px;   
+    }
+    
+    .slide {
+        margin-left: 0px;
+        transition: all 0.5s ease;             
+    }
+
+    #left-main-container {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        position: absolute;
+        overflow-y: scroll;
+        justify-content: flex-start; 
+        align-items: center;       
+        min-height: 100vh;          
+        margin-top: 90px;        
+        /* margin-left: 5px;     */
+        transition: all 0.5s ease;   
+    } 
+
+    .mobile-view {
+        backdrop-filter: blur(10px);
+        transition: all 0.5s ease;
+    }
+
+    .list-item {
+        border: 1px solid;
+        background-color: rgb(0,0,0,0.6);        
+    }
+
+    #right-main-container {
+        padding: 0 15%;
+    }
+
+}
+
+@media screen and (min-width: 761px)  {
+    .history-list {
+        width: 100%;        
+        margin-left: -100vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;    
+    }
+    
+    .slide {
+        margin-left: 0px;
+        transition: all 0.5s ease;
+    }
+    #left-main-container {    
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;        
+        margin-left: 60px;
+    }
+}

@@ -37,6 +37,7 @@ const getDataFromOpenWeather = async (data={}) => {
         console.log(newData)
         return newData;
     } catch(e) {
+        alert(e.message);
         console.log("ERROR OCCURRED -> OpenWeatherAPI");
     }
 }
@@ -198,6 +199,7 @@ document.getElementById('conversion').addEventListener('click', ()=>{
 document.getElementById('history-button').addEventListener('click', ()=>{
     
     document.getElementsByClassName('history-list')[0].classList.toggle('slide');
+    document.getElementById('left-main-container').classList.toggle('mobile-view');
     
     if(historyVis) {
         //close history
@@ -245,9 +247,15 @@ function populateHistory(data) {
             aCode.classList = ['a-code'];
             aCode.innerHTML = subKey;
 
+            const itemDate = document.createElement('p');
+            itemDate.classList = ['item-date'];
+            const date = unixToDate(subValue.date);
+            itemDate.innerHTML = `${date.weekday}, ${date.day}-${date.month}-${date.year}`
+
             itemHead.appendChild(cName);
             itemHead.appendChild(aName);
             itemHead.appendChild(aCode);
+            itemHead.appendChild(itemDate);
 
             //item content 
             const itemLeftContent = document.createElement('div');
@@ -264,19 +272,14 @@ function populateHistory(data) {
 
             const itemWeatherInfo = document.createElement('p');
             itemWeatherInfo.classList = ['item-weather-info'];
-            itemWeatherInfo.innerHTML = subValue.main;
-            
-            const itemDate = document.createElement('p');
-            itemDate.classList = ['item-date'];
-            const date = unixToDate(subValue.date);
-            itemDate.innerHTML = `${date.weekday},<br>${date.day}-${date.month}-${date.year}`
+            itemWeatherInfo.innerHTML = subValue.main;                    
             
             const itemFeelings = document.createElement('p');
             itemFeelings.classList = ['item-feelings'];
             itemFeelings.innerHTML = subValue.fav;
             
             weatherDateContainer.appendChild(itemWeatherInfo);
-            weatherDateContainer.appendChild(itemDate);
+            // weatherDateContainer.appendChild(itemDate);
 
             itemLeftContent.appendChild(itemTemp);
             itemLeftContent.appendChild(weatherDateContainer);            
