@@ -196,16 +196,17 @@ document.getElementById('conversion').addEventListener('click', ()=>{
 });
 
 document.getElementById('history-button').addEventListener('click', ()=>{
+    
+    document.getElementsByClassName('history-list')[0].classList.toggle('slide');
+    
     if(historyVis) {
         //close history
         historyVis = false;
-        document.getElementById('history-button').innerHTML = "View History";
-        document.getElementById('history-list').style.display = "none";
+        document.getElementById('history-button').innerHTML = "View History";        
     } else {
         //view history
         historyVis = true;
         document.getElementById('history-button').innerHTML = "Close History";
-        document.getElementById('history-list').style.display = "flex";
     }
 });
 
@@ -214,11 +215,11 @@ function populateHistory(data) {
     historyVis = false;
     document.getElementById('history-button').innerHTML = "View History"
 
-    const oldList = document.getElementById('history-list');
+    const oldList = document.getElementsByClassName('history-list')[0];
     if(oldList != null) oldList.remove();
 
     const historyList = document.createElement('div');
-    historyList.id = 'history-list';
+    historyList.className = 'history-list';
     for(const [key, value] of Object.entries(data)) {
         for(const [subKey, subValue] of Object.entries(data[key])) {
             const listItem = document.createElement('div');
@@ -240,8 +241,13 @@ function populateHistory(data) {
             aName.classList = ['a-name'];
             aName.innerHTML = subValue.name.toUpperCase();
 
+            const aCode = document.createElement('p');
+            aCode.classList = ['a-code'];
+            aCode.innerHTML = subKey;
+
             itemHead.appendChild(cName);
             itemHead.appendChild(aName);
+            itemHead.appendChild(aCode);
 
             //item content 
             const itemLeftContent = document.createElement('div');
