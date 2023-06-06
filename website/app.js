@@ -17,9 +17,7 @@ const postData = async (data={}) => {
         body: JSON.stringify(data)
     });
 
-    try {        
-        // console.log(response);
-        // console.log(response.status);
+    try {                
         const newData = await response.json();        
         // console.log(newData);
         console.log(newData)
@@ -98,14 +96,13 @@ function getDataAndUpdateUI(countryCode, countryName, zip, feeling) {
     .then(() => getData({countryCode: countryCode, zipCode: zip}))      
     .then((data) => {
 
-        setBackgroundImage(data.icon);
         tempInF = data.temp;
-
+        isTempInF = true;        
+        document.getElementById('conversion').innerHTML = '(Convert to °C)';
         document.getElementById('location-title').innerHTML = `${data.name}`;
         document.getElementById('temp').innerHTML = `${data.temp} F`;
         document.getElementById('weather-info').innerHTML = `${data.main}`
-        document.getElementById('wind').innerHTML = `${data.wind} miles/hour`
-
+        document.getElementById('wind').innerHTML = `${data.wind} miles/hour`            
         document.getElementById('icon').src = `https://openweathermap.org/img/wn/${data.icon}@2x.png`;
         
         //get date from unix time stamp
@@ -117,6 +114,7 @@ function getDataAndUpdateUI(countryCode, countryName, zip, feeling) {
         document.getElementById('sunrise').innerHTML = `${sunriseTime.hours.slice(0, sunriseTime.hours.length-3)}:${sunriseTime.minutes} AM`
         document.getElementById('sunset').innerHTML = `${sunsetTime.hours.slice(0, sunsetTime.hours.length-3)}:${sunsetTime.minutes} PM`
         document.getElementById('cloud').innerHTML = `${data.cloudiness} %`            
+        setBackgroundImage(data.icon);
     })
     .then(()=> getAllData())
     .then((data) => {
@@ -218,6 +216,9 @@ function populateHistory(data) {
 
     historyVis = false;
     document.getElementById('history-button').innerHTML = "View History"
+    if(document.getElementById('left-main-container').classList.contains('mobile-view')){
+        document.getElementById('left-main-container').classList.remove('mobile-view');
+    }
 
     const oldList = document.getElementsByClassName('history-list')[0];
     if(oldList != null) oldList.remove();
