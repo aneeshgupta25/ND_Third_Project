@@ -11,22 +11,16 @@ app.use(cors());
 
 app.use(express.static('website'));
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 const server = app.listen(port, listening);
 function listening() {
     console.log("I am a Server and I'm Listening!!");
 }
 
-app.get('/weatherInfo', (req, res)=>{
-    // const pinCode = req.query.pinCode;
+app.get('/weatherInfo', (req, res)=>{    
     const c = req.query.c;
-    const z = req.query.z;
-    // console.log(q);
-    // console.log("*********")
-    // console.log(projectData);
-    // console.log("*********")
-    const response = projectData[c][z];
-    // console.log(response);
+    const z = req.query.z;    
+    const response = projectData[c][z];    
     res.send(response);
 });
 
