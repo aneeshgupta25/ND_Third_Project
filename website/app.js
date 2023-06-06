@@ -33,11 +33,13 @@ const getDataFromOpenWeather = async (data={}) => {
     const response = await fetch(`${baseURL}zip=${data.zipCode},${data.countryCode}&appid=${apiKey}`);    
     try {
         const newData = await response.json();
+        if(newData.hasOwnProperty("cod")) {
+            if(newData["cod"] == "404") alert(newData["message"])
+        }
         console.log(`New Data From OpenWeatherAPI -> ${newData}`);    
         console.log(newData)
         return newData;
-    } catch(e) {
-        alert(e.message);
+    } catch(e) {        
         console.log("ERROR OCCURRED -> OpenWeatherAPI");
     }
 }
