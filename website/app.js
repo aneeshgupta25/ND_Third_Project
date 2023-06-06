@@ -4,6 +4,7 @@ const apiKey = 'aed7fea30e09c377e19166172ff010d0&units=imperial';
 const baseURL = 'https://api.openweathermap.org/data/2.5/weather?'
 let isTempInF = true;
 let tempInF, tempInC;
+let historyVis = false;
 
 const postData = async (data={}) => {    
     const url = '/postWeather';
@@ -52,7 +53,18 @@ const getData = async (data) => {
     }
 }
 
-function getDataAndUpdateUI(countryCode, zip, feeling) {
+const getAllData = async () => {
+    const response = await fetch('/all');
+    try {
+        const newData = await response.json();
+        console.log(newData);
+        return newData;
+    } catch(e) {
+        console.log("ERROR OCCURRED -> Get All");
+    }
+}
+
+function getDataAndUpdateUI(countryCode, countryName, zip, feeling) {
 
     getDataFromOpenWeather({
         zipCode: zip,
@@ -74,6 +86,7 @@ function getDataAndUpdateUI(countryCode, zip, feeling) {
                     sunrise: data.sys.sunrise,
                     sunset: data.sys.sunset,
                     icon: data.weather[0].icon,
+                    countryName: countryName,
                     fav: feeling                  
                 }
             })           
@@ -96,11 +109,16 @@ function getDataAndUpdateUI(countryCode, zip, feeling) {
         const currDate = unixToDate(data.date);
         const sunriseTime = unixToDate(data.sunrise);
         const sunsetTime = unixToDate(data.sunset);
-        document.getElementById('date').innerHTML = `${currDate.weekday},\n${currDate.day}-${currDate.month}-${currDate.year}`
+        document.getElementById('date').innerHTML = `${currDate.weekday},<br>${currDate.day}-${currDate.month}-${currDate.year}`
         document.getElementById('user-feelings').innerHTML = data.fav;
         document.getElementById('sunrise').innerHTML = `${sunriseTime.hours.slice(0, sunriseTime.hours.length-3)}:${sunriseTime.minutes} AM`
         document.getElementById('sunset').innerHTML = `${sunsetTime.hours.slice(0, sunsetTime.hours.length-3)}:${sunsetTime.minutes} PM`
-        document.getElementById('cloud').innerHTML = `${data.cloudiness} %`
+        document.getElementById('cloud').innerHTML = `${data.cloudiness} %`            
+    })
+    .then(()=> getAllData())
+    .then((data) => {
+        //populate the history tab            
+        populateHistory(data);
     });
 }
 
@@ -131,7 +149,9 @@ function unixToDate(unix) {
 }
 
 document.getElementById('generate').addEventListener('click', ()=>{
-    const countryCode = document.getElementById('search-country-dropdown').value;        
+    const e = document.getElementById('search-country-dropdown');
+    const countryCode = e.value; 
+    const countryName = e.options[e.selectedIndex].text;
     let zip = document.getElementById('zip').value;     
     let feeling = document.getElementById('feelings').value;
     feeling = feeling.trim();
@@ -148,7 +168,7 @@ document.getElementById('generate').addEventListener('click', ()=>{
         return;
     }
 
-    getDataAndUpdateUI(countryCode, zip, feeling);
+    getDataAndUpdateUI(countryCode, countryName, zip, feeling);
 
 })
 
@@ -174,3 +194,102 @@ document.getElementById('conversion').addEventListener('click', ()=>{
         }
     }
 });
+
+document.getElementById('history-button').addEventListener('click', ()=>{
+    if(historyVis) {
+        //close history
+        historyVis = false;
+        document.getElementById('history-button').innerHTML = "View History";
+        document.getElementById('history-list').style.display = "none";
+    } else {
+        //view history
+        historyVis = true;
+        document.getElementById('history-button').innerHTML = "Close History";
+        document.getElementById('history-list').style.display = "flex";
+    }
+});
+
+function populateHistory(data) {
+
+    historyVis = false;
+    document.getElementById('history-button').innerHTML = "View History"
+
+    const oldList = document.getElementById('history-list');
+    if(oldList != null) oldList.remove();
+
+    const historyList = document.createElement('div');
+    historyList.id = 'history-list';
+    for(const [key, value] of Object.entries(data)) {
+        for(const [subKey, subValue] of Object.entries(data[key])) {
+            const listItem = document.createElement('div');
+            listItem.classList = ['list-item'];
+            const itemHead = document.createElement('div');
+            itemHead.classList = ['item-head'];
+            const itemContent = document.createElement('div');
+            itemContent.classList = ['item-content'];
+
+            listItem.appendChild(itemHead);
+            listItem.appendChild(itemContent);
+
+            //item head
+            const cName = document.createElement('p');
+            cName.classList = ['c-name'];
+            cName.innerHTML = subValue.countryName.toUpperCase();
+            
+            const aName = document.createElement('p');
+            aName.classList = ['a-name'];
+            aName.innerHTML = subValue.name.toUpperCase();
+
+            itemHead.appendChild(cName);
+            itemHead.appendChild(aName);
+
+            //item content 
+            const itemLeftContent = document.createElement('div');
+            itemLeftContent.classList = ['item-left-content'];
+            const itemRightContent = document.createElement('div');
+            itemRightContent.classList = ['item-right-content'];
+
+            const itemTemp = document.createElement('p');
+            itemTemp.classList = ['item-temp'];
+            itemTemp.innerHTML = `${subValue.temp} F`;
+            
+            const weatherDateContainer = document.createElement('div');
+            weatherDateContainer.classList = ['weather-date-container'];
+
+            const itemWeatherInfo = document.createElement('p');
+            itemWeatherInfo.classList = ['item-weather-info'];
+            itemWeatherInfo.innerHTML = subValue.main;
+            
+            const itemDate = document.createElement('p');
+            itemDate.classList = ['item-date'];
+            const date = unixToDate(subValue.date);
+            itemDate.innerHTML = `${date.weekday},<br>${date.day}-${date.month}-${date.year}`
+            
+            const itemFeelings = document.createElement('p');
+            itemFeelings.classList = ['item-feelings'];
+            itemFeelings.innerHTML = subValue.fav;
+            
+            weatherDateContainer.appendChild(itemWeatherInfo);
+            weatherDateContainer.appendChild(itemDate);
+
+            itemLeftContent.appendChild(itemTemp);
+            itemLeftContent.appendChild(weatherDateContainer);            
+            itemRightContent.appendChild(itemFeelings);
+
+            itemContent.appendChild(itemLeftContent);
+            itemContent.appendChild(itemRightContent);
+
+            listItem.appendChild(itemHead);
+            listItem.appendChild(itemContent);
+
+            historyList.appendChild(listItem);
+        }
+    }
+    document.getElementById('left-main-container').appendChild(historyList);
+}
+
+//initilaize history
+getAllData()
+.then((data)=>{
+    populateHistory(data);
+})

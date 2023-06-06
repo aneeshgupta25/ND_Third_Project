@@ -29,6 +29,7 @@ app.get('/weatherInfo', (req, res)=>{
     // console.log(response);
     res.send(response);
 });
+
 app.post('/postWeather', addUserData);
 function addUserData(req, res) {
     const key = req.body.key;    
@@ -39,4 +40,9 @@ function addUserData(req, res) {
 
     console.log(projectData);        
     res.send({myStatus: 'Received'});
+}
+
+app.get('/all', getAll);
+function getAll(req, res) {
+    res.send(projectData);
 }

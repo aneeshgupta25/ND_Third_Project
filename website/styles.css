@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap');
 
+::-webkit-scrollbar {
+    width: 0.5rem; /* Adjust the width as needed */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Make the scrollbar track transparent */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: transparent; /* Make the scrollbar thumb (handle) transparent */
+  }
+  @-moz-document url-prefix() {
+    .container {
+      scrollbar-width: none; /* Hide scrollbar for Firefox */
+    }
+  }
+
 * {
     margin: 0px;
     padding: 0px;
@@ -8,12 +25,25 @@
 }
 
 #container {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;    
+    flex-direction: row;
     /* overflow: hidden; */
-
+/* 
     background-image: url("imgs/default.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    background-attachment: fixed;  */
+
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* flex-direction: row; */
+    /* overflow: hidden; */
+    background-image: url(imgs/default.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -251,4 +281,125 @@
 #conversion:hover {
     color: yellow;
     cursor: pointer;
+}
+
+#left-main-container {
+    display: flex;
+    flex-direction: column;
+    /* width: 24vw; */
+    overflow-y: scroll;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    /* padding: 10px; */
+    margin-left: 60px;
+}
+
+#right-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+#history-button {
+    position: fixed;
+    left: 0;
+    top: 60%;
+    transform-origin: top left;
+    transform: translateY(-50%) rotate(-90deg);
+
+    padding: 15px 20px;
+    background-color: black;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#history-list {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 22px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.item-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.history.history {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.c-name {
+    font-size: 30px;
+    padding: 5px;
+}
+
+.a-name {
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+.item-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.item-left-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;   
+}
+
+.item-right-content {
+    margin-right: 7px;
+}
+
+.item-temp {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.item-feelings {
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.item-weather-info {
+    margin-bottom: 7px;
+}
+
+.weather-date-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: end;
 }
