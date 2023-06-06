@@ -1,39 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap');
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
     color: white;
 }
-/* 
-:root {
-    --poppins-semi-bold: 
-} */
 
-.container {
+#container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; 
-    margin: 0;
+    align-items: center;    
     /* overflow: hidden; */
-    background-color: yellow;
-    background-image: url("imgs/search_location.png");
+
+    background-image: url("imgs/default.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    background-attachment: fixed;
 }
 
 .main-content {    
@@ -59,7 +44,7 @@ input[type=number] {
 
 .search-field-width{
     width: 100%;
-    padding-right: 5%;    
+    /* padding-right: 5%;     */
 }
 
 .search-common-props {
@@ -77,7 +62,7 @@ input[type=number] {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 10px;    
+    /* padding-right: 10px;     */
 }
 
 #search-icon {
@@ -121,34 +106,34 @@ input[type=number] {
 
 .response-content {   
     display: flex;    
-    align-items: center;     
+    align-items: center;   
+    justify-content: space-between;  
     box-sizing: border-box;
     text-align: left;
     width: 100%;
     padding: 0% 5%;
 }
 
-.left-content {
-    width: 50%;
+.left-content {    
     font-size: 20px;
     font-weight: 600;
 }
 
-.right-content {
-    width: 50%;
+.right-content {    
     font-size: 20px;
     font-weight: 600;
+}
+
+#location-supporting-text {
+    font-weight: 400;
+    font-size: 25px;
+    text-align: center;
 }
 
 #location-title {
     font-weight: 600;    
     font-size: 40px;
-}
-
-#temp {
-    font-size: 60px;
-    font-weight: 800;
-    margin: 20px 0px;
+    text-align: center;
 }
 
 #content {
@@ -159,7 +144,7 @@ input[type=number] {
 }
 
 #content img {
-    width: 30px;
+    width: 40px;
     height: auto;
     margin-right: 5px;
 }
@@ -183,12 +168,12 @@ input[type=number] {
     margin-bottom: 5px;
 }
 
-#min-temp-container {
+#sunrise-container {
     display: flex;
     align-items: center;
 }
 
-#max-temp-container {
+#sunset-container {
     display: flex;
     align-items: center;
 }
@@ -198,11 +183,11 @@ input[type=number] {
     align-items: center;
 }
 
-#min-temp {
+#sunrise {
     margin-left: 5px;
 }
 
-#max-temp {
+#sunset {
     margin-left: 5px;
 }
 
@@ -238,5 +223,32 @@ input[type=number] {
     border-radius: 12px;
     font-size: 16px;
     margin-top: 10px;
+    cursor: pointer;
+}
+
+.props-label {
+    font-weight: 200;
+}
+
+.temp-conversion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#temp {
+    font-size: 60px;
+    font-weight: 800;
+    margin: 20px 0px 0px 0px
+}
+
+#conversion {
+    margin-bottom: 30px;
+    font-size: 17px;
+    font-weight: 200;
+}
+
+#conversion:hover {
+    color: yellow;
     cursor: pointer;
 }

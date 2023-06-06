@@ -10,34 +10,8 @@
 <body>
     
 
-    <div class="container">
+    <div id="container">
         <div class="main-content">
-            <!-- <div class="zip_container">
-                <div class="zip_label">
-                    <label for="zip">Enter ZipCode Here</label>
-                </div>
-                <div class="zip_input">
-                    <input type="text" placeholder="Enter Zip Code Here" id="zip"/>
-                </div>
-            </div>
-            <div class="feeling_container">
-                <div class="feeling_label">
-                    <label for="feelings">How are you feeling today?</label>
-                </div>
-                <div class="feeling_input">
-                    <textarea cols="20" rows="10" id="feelings" placeholder="Don't be shy and express what are you feeling today.. :)"></textarea>
-                </div>
-            </div>
-            <div>
-                <button id="generate">Submit</button>
-            </div>
-            <div class="container" id="entryHolder">
-                <p class="container-1" id="date"></p>
-                <p class="container-2" id="temp"></p>
-                <p class="container-3" id="content"></p>
-            </div> -->
-           
-            <!-- country and zip -->
             <div class="required-field">
                 <div class="search" id="search-country">
                     <select class="search-common-props" name="country" id="search-country-dropdown">
@@ -298,7 +272,7 @@
                 </div>            
                 <div class="search" id="search-zip">
                     <div class="search-field-width">                    
-                        <input type="number" placeholder="Enter Zip Code Here" class="search-common-props" id="zip" autocomplete="off">                      
+                        <input type="text" placeholder="Enter Zip Code Here" class="search-common-props" id="zip" autocomplete="off">                      
                     </div>                      
                 </div>   
             </div>  
@@ -313,50 +287,56 @@
             </div>
             <!-- response to show -->
             <div class="card-head">
-                <div id="location-title">Weather in Hyderabad</div>
-                <div id="temp">26 F</div>
+                <div id="location-supporting-text">Weather in</div>
+                <div id="location-title">-- --</div>                
+                <div class="temp-conversion">
+                    <div id="temp">--</div>
+                    <div id="conversion">(Convert to °C)</div>                
+                </div>
             </div>
             <div class="response-content">
                 <div class="left-content" id="entryHolder">
                     <!-- temp -->
                     <!-- desc -->
                     <div id="content">
-                        <img src="imgs/search.png" alt=""/>
-                        <p>Cloudy</p>
-                    </div>
-                    <!-- wind speed -->
-                    <div id="wind-container">
-                        <p>Wind Speed:</p>
-                        <p id="wind">3.4 km/hr</p>
+                        <img id="icon" alt=""/>
+                        <p id="weather-info">Weather Info</p>
                     </div>
                     <!-- data -->
                     <div id="date">
-                        05th June 2023
+                        Date - N/A
                     </div>
+                    <!-- wind speed -->
+                    <div id="wind-container">
+                        <p class="props-label">Wind Speed:</p>
+                        <p id="wind">N/A</p>
+                    </div>                    
                 </div>
                 <div class="right-content">
                     <!-- min-temp -->
-                    <div id="min-temp-container">
-                        <p>Min Temp:</p>
-                        <p id="min-temp">3.4 km/hr</p>
+                    <!-- sunrise -->
+                    <div id="sunrise-container">
+                        <p class="props-label">Sunrise:</p>
+                        <p id="sunrise">N/A</p>
                     </div>
                     <!-- max-temp -->
-                    <div id="max-temp-container">
-                        <p>Max Temp:</p>
-                        <p id="max-temp">3.4 km/hr</p>
+                    <!-- sunset -->
+                    <div id="sunset-container">
+                        <p class="props-label">Sunset:</p>
+                        <p id="sunset">N/A</p>
                     </div>
                     <!-- cloud -->
                     <div id="cloud-container">
-                        <p>Coudiness:</p>
-                        <p id="cloud">3.4 km/hr</p>
+                        <p class="props-label">Coudiness:</p>
+                        <p id="cloud">N/A</p>
                     </div>
                 </div>
             </div>                   
             <div class="user-feelings-container">
-                Your Feelings Today.. 
+                Your Feelings Today:
             </div>
             <div id="user-feelings">
-                I am Feeling Awesome Today :)..
+                I am Feeling Awesome Today &#128515;..
             </div>
         </div>
     </div>

@@ -19,20 +19,23 @@ function listening() {
 
 app.get('/weatherInfo', (req, res)=>{
     // const pinCode = req.query.pinCode;
-    const q = req.query.q;
+    const c = req.query.c;
+    const z = req.query.z;
     // console.log(q);
     // console.log("*********")
     // console.log(projectData);
     // console.log("*********")
-    const response = projectData[q];
+    const response = projectData[c][z];
     // console.log(response);
     res.send(response);
 });
 app.post('/postWeather', addUserData);
 function addUserData(req, res) {
-    const key = req.body.key;
+    const key = req.body.key;    
+    const zip = req.body.zip;    
     const value = req.body.value;    
-    projectData[key] = value;
+    if(projectData[key] == undefined) projectData[key] = {};
+    projectData[key][zip] = value;
 
     console.log(projectData);        
     res.send({myStatus: 'Received'});
