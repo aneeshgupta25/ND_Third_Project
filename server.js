@@ -40,3 +40,8 @@ app.get('/all', getAll);
 function getAll(req, res) {
     res.send(projectData);
 }
+
+// Route handler for the root route
+app.get('/', (req, res) => {    
+    res.send('Hello, World!');
+  });
