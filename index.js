@@ -43,5 +43,6 @@ function getAll(req, res) {
 
 // Route handler for the root route
 app.get('/', (req, res) => {        
-    res.sendFile('index.html', { root: 'website' });    
+    // res.sendFile('index.html', { root: 'website' });    
+    res.send("Hello Data");
   });
