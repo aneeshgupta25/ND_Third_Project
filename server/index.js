@@ -8,7 +8,8 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static('website'));
+// app.use(express.static('website'));
+app.use(express.static(path.join(__dirname, '../website')));
 
 const port = process.env.PORT || 8000;
 const server = app.listen(port, listening);
