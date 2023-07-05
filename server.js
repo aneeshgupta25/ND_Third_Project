@@ -1,18 +1,18 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const projectData = {};
 const app = express();
 
-const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-const cors = require('cors');
 app.use(cors());
-
 app.use(express.static('website'));
 
 const port = process.env.PORT || 8000;
 const server = app.listen(port, listening);
+
 function listening() {
     console.log("I am a Server and I'm Listening!!");
 }
@@ -42,6 +42,6 @@ function getAll(req, res) {
 }
 
 // Route handler for the root route
-app.get('/', (req, res) => {    
-    res.send('Hello, World!');
+app.get('/', (req, res) => {        
+    res.sendFile('index.html', { root: 'website' });
   });
